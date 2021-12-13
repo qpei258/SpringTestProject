@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	
+	<bean id="helloService" class="com.coderby.myapp.di.HelloService"/>
+	
+	<!-- 기본 의존성 주입 (helloController에 helloService) 주입 
+	<bean id="helloController" class="com.coderby.myapp.di.HelloController">
+		<constructor-arg ref="helloService"/>
+	</bean> -->
+	
+	<!-- 객체 생성시 setter 인자 전달 -->
+	<bean id="helloController" class="com.coderby.myapp.di.HelloController">
+		<property name="helloService" ref="helloService"></property>
+	</bean>
+	
+	<!-- 객체 생성 시 생성자 인자 전달 
+	<bean id="dataSource" class="com.coderby.myapp.database.BasicDataSource">
+		<constructor-arg index="0" value="oracle.jdbc.driver.OracleDriver"/>
+		<constructor-arg index="1" value="jdbc:oracle:thin:@localhost:1521:xe"/>
+	</bean>-->
+	
+	<!-- 객체 생성 시 setter 인자 전달 -->
+	<bean id="dataSource" class="com.coderby.myapp.database.BasicDataSource">
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
+	</bean>
+	
+</beans>
